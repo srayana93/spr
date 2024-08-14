@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Reports</h2>
+    <ul>
+      {% for report in reports %}
+        <li><a href="{% url 'analytics:report_detail' report.id %}">{{ report.user.email }} - {{ report.total_orders }} Orders</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

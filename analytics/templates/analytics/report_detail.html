@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Report Detail</h2>
+    <p>User: {{ report.user.email }}</p>
+    <p>Total Orders: {{ report.total_orders }}</p>
+    <p>Total Spent: {{ report.total_spent }}</p>
+    <!-- Add more detailed report data here -->
+  </div>
+{% endblock %}

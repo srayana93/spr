@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Manage Products</h2>
+    <a href="{% url 'vendors:vendor_product_create' %}" class="btn btn-primary mb-3">Add New Product</a>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          <tr>
+            <td>{{ product.name }}</td>
+            <td>${{ product.price }}</td>
+            <td>{{ product.stock_quantity }}</td>
+            <td>
+              <a href="{% url 'vendors:vendor_product_update' product.slug %}" class="btn btn-secondary">Edit</a>
+              <a href="{% url 'vendors:vendor_product_delete' product.slug %}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

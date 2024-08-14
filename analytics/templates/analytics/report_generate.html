@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Generate Report</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Generate</button>
+    </form>
+  </div>
+{% endblock %}

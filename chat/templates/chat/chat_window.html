@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Chat Window</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <ul class="list-group">
+          {% for room in chat_rooms %}
+            <li class="list-group-item">
+              <a href="{% url 'chat:chat_history' room.id %}">Chat Room {{ room.id }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-md-8">
+        {% if chat_room %}
+          <h3>Chat History</h3>
+          <ul class="list-group">
+            {% for message in chat_room.messages.all %}
+              <li class="list-group-item">
+                <strong>{{ message.sender.email }}:</strong> {{ message.message }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

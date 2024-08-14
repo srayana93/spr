@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Payment Failed</h2>
+    <p>There was an issue processing your payment. Please try again.</p>
+    <a href="{% url 'payments:payment_form' %}" class="btn btn-danger">Try Again</a>
+  </div>
+{% endblock %}

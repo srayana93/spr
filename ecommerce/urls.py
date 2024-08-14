@@ -15,3 +15,10 @@ urlpatterns = [
     path("vendors/", include("vendors.urls")),
     path("chat/", include("chat.urls")),
 ]
+
+from .views import home_view
+
+urlpatterns = [
+    path('', home_view, name='home'),
+    # Other URL patterns...
+]
