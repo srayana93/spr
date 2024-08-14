@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'products'
+app_name = 'products'  # This defines the namespace
 
 urlpatterns = [
     # Define your URL patterns here
