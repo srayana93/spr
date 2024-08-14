@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission, AbstractUser
 from django.db import models
 from django.utils import timezone
 
@@ -23,23 +23,23 @@ class CustomUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_vendor = models.BooleanField(default=False)
-    is_customer = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+class CustomUser(AbstractUser):
+    groups = models.ManyToManyField(
+        Group,
+        related_name='custom_user_set',  # Change this related name
+        blank=True,
+        help_text='The groups this user belongs to.',
+        verbose_name='groups',
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='custom_user_permissions_set',  # Change this related name
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions',
+    )
 
-    objects = CustomUserManager()
-
-    def __str__(self):
-        return self.email
 
 class Address(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='addresses')
@@ -64,11 +64,11 @@ class UserProfile(models.Model):
         return self.user.email
 
 class VendorProfile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='vendor_profile')
-    company_name = models.CharField(max_length=255)
-    company_website = models.URLField(max_length=200, blank=True)
-    business_address = models.CharField(max_length=255, blank=True)
-    business_phone = models.CharField(max_length=15, blank=True)
+    user = models.OneToOneField(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name='accounts_vendor_profile'  # Change this related name
+    )
 
     def __str__(self):
         return self.company_name

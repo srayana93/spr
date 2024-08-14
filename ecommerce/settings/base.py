@@ -31,13 +31,25 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'accounts',
+    'products',
+    'categories',
+    'cart',
+    'orders',
+    'wishlist',
+    'payments',
+    'analytics',
+    'vendors',
+    'chat',
+    # Add any other apps here
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
